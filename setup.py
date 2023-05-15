@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='colab',
+    name='ai_tutor',
     version='0.1.0',
-    py_modules=['colab']
+    py_modules=['ai_tutor']
 )

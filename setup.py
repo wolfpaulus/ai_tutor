@@ -1,12 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='aitutor',
+    name='colab',
     version='0.1.0',
-    py_modules=['aitutor'],
-    install_requires=[],
-    entry_points='''
-        [console_scripts]
-        aitutor=aitutor:print_wrapped
-    '''
+    py_modules=['colab']
 )

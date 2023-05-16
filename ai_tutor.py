@@ -34,14 +34,15 @@ def ask(server: str, context: [], question: str = "Please enter your question: "
     except ValueError as e:
         print(e)
         return "Hmm, did you initialize the tutor?"
-    except KeyboardInterrupt:
-        pass
     except Exception as e:
         return str(e.__cause__)
 
 
 def prompt(server, context: [], p: str = "Please enter your question: ") -> None:
-    print_wrapped(ask(server, context, question=input(p)))
+    try:
+        print(ask(server, context, question=input(p)))
+    except KeyboardInterrupt:
+        pass
 
 
 def validate(server: str, task: str) -> None:
@@ -52,7 +53,7 @@ def validate(server: str, task: str) -> None:
     notebook_json_string = _message.blocking_request('get_ipynb', request='', timeout_sec=5)
     code = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
     print(code)
-    print_wrapped(ask(server, context, code, code=True))
+    print(ask(server, context, code, code=True))
 
 
 def create_context(task: str, steps: str) -> []:
@@ -62,6 +63,15 @@ def create_context(task: str, steps: str) -> []:
         {"role": "assistant", "content": steps}
     ]
 
+
+def set_css():
+    display(HTML('''<style>
+  input { width: 100%;}
+  pre { overflow-wrap: break-word }
+  </style>'''))
+
+
+get_ipython().events.register('pre_run_cell', set_css)
 
 print("""Disclaimer: 
 The AI Python Tutor is an educational tool, 

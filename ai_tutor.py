@@ -69,11 +69,11 @@ def create_context(task: str, steps: str) -> []:
     ]
 
 
-def set_css():
-    display(HTML('''<style>input { width: 100%;}</style>'''))
-
-
-get_ipython().events.register('pre_run_cell', set_css)
+# def set_css():
+#     display(HTML('''<style>input { width: 100%;}</style>'''))
+#
+#
+# get_ipython().events.register('pre_run_cell', set_css)
 
 print("""Disclaimer: 
 The AI Python Tutor is an educational tool, 

@@ -40,7 +40,7 @@ def ask(server: str, context: [], question: str = "Please enter your question: "
 
 def prompt(server, context: [], p: str = "Please enter your question: ") -> None:
     try:
-        print(ask(server, context, question=input(p)))
+        print(ask(server, context, question=input(f"\n{p}\n")))
     except KeyboardInterrupt:
         pass
 
@@ -67,7 +67,7 @@ def create_context(task: str, steps: str) -> []:
 def set_css():
     display(HTML('''<style>
   input { width: 100%;}
-  pre { overflow-wrap: break-word }
+  pre { white-space: pre-wrap; overflow-wrap: break-word }
   </style>'''))
 
 

@@ -15,8 +15,9 @@ def print_wrapped(text: str) -> None:
         print(element)
 
 
-def ask(server: str, context: [], question: str = "Please enter your question: ", code: bool = False) -> str:
+def ask(server: str, context: [], question, code: bool = False) -> str:
     try:
+        context.append({"role": "user", "content": question})
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
         req = Request(server, method="POST")
         req.add_header('User-Agent', 'Mozilla/5.0')
@@ -27,8 +28,9 @@ def ask(server: str, context: [], question: str = "Please enter your question: "
             status = resp.status
             content = loads(resp.read().decode())
             if status == 200:
-                if not code:
-                    context.append({"role": "user", "content": question})
+                if code:
+                    context.pop()
+                else:
                     context.append({"role": "assistant", "content": content})
             return content
     except ValueError as e:
@@ -40,7 +42,8 @@ def ask(server: str, context: [], question: str = "Please enter your question: "
 
 def prompt(server, context: [], p: str = "Please enter your question: ") -> None:
     try:
-        print_wrapped(ask(server, context, question=input(f"\n{p}\n")))
+        print()
+        print_wrapped(ask(server, context, question=input(p)))
     except KeyboardInterrupt:
         pass
 

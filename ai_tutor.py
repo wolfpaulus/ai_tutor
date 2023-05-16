@@ -40,7 +40,7 @@ def ask(server: str, context: [], question: str = "Please enter your question: "
 
 def prompt(server, context: [], p: str = "Please enter your question: ") -> None:
     try:
-        print(ask(server, context, question=input(f"\n{p}\n")))
+        print_wrapped(ask(server, context, question=input(f"\n{p}\n")))
     except KeyboardInterrupt:
         pass
 
@@ -53,7 +53,7 @@ def validate(server: str, task: str) -> None:
     notebook_json_string = _message.blocking_request('get_ipynb', request='', timeout_sec=5)
     code = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
     print(code)
-    print(ask(server, context, code, code=True))
+    print_wrapped(ask(server, context, code, code=True))
 
 
 def create_context(task: str, steps: str) -> []:
@@ -65,10 +65,7 @@ def create_context(task: str, steps: str) -> []:
 
 
 def set_css():
-    display(HTML('''<style>
-  input { width: 100%;}
-  pre { white-space: pre-wrap; overflow-wrap: break-word }
-  </style>'''))
+    display(HTML('''<style>input { width: 100%;}</style>'''))
 
 
 get_ipython().events.register('pre_run_cell', set_css)

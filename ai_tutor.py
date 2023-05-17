@@ -1,12 +1,10 @@
 """
     AI Tutor init code for colab integration
 """
-#from IPython.display import display, Markdown, Latex, HTML
-#from urllib.parse import urlencode
+
 from json import dumps, loads
 from urllib.request import Request, urlopen
 import textwrap
-
 
 
 def print_wrapped(text: str) -> None:

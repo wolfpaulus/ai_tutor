@@ -43,6 +43,8 @@ _What does it mean that a number is prime?_ or _How would I do step 3?_
 The AI Tutor will answer these questions in the context of the given task and strategy. 
 However, code snippets longer than 8 lines are removed from the answer:
 
+![Alt text](images/q1.png?raw=true "What does it mean that a number is prime?")
+
 _Please enter your question: **What does it mean that a number is prime?**
 A prime number is a positive integer greater than 1 that has no positive integer divisors
 other than 1 and itself. In other words, a prime number is a number that is only divisible
@@ -61,7 +63,7 @@ This function takes an integer `n` as input and returns `True`
 if `n` is prime, and `False` otherwise._
 
 
-## Psuedo Code
+## Pseudo Code
 Depending on the task, it might be helpful to include pseudo code.
 E.g. for the prime numbers task, the pseudo code could be:
 ```

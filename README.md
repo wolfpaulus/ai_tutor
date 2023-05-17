@@ -40,27 +40,12 @@ E.g. for the prime numbers task, the strategy could be:
 At this point, the student may want to ask questions about the strategy, e.g. 
 _What does it mean that a number is prime?_ or _How would I do step 3?_
 
+![Alt text](images/q1.png?raw=true "What does it mean that a number is prime?")
+
 The AI Tutor will answer these questions in the context of the given task and strategy. 
 However, code snippets longer than 8 lines are removed from the answer:
 
-![Alt text](images/q1.png?raw=true "What does it mean that a number is prime?")
-
-_Please enter your question: **What does it mean that a number is prime?**
-A prime number is a positive integer greater than 1 that has no positive integer divisors
-other than 1 and itself. In other words, a prime number is a number that is only divisible
-by 1 and itself. For example, 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53,
-59, 61, 67, 71, 73, 79, 83, 89, 97, and so on are prime numbers._
-
-_Please enter your question: **How would I do step 3?**
-To check if a number is prime, you can use a loop to divide the number by all the integers
-from 2 to the square root of the number. If the number is divisible by any of these
-integers, then it is not prime. If the number is not divisible by any of these integers,
-then it is prime. Here is an example code snippet that checks if a number is prime:
-
- ... source code removed ... 
-
-This function takes an integer `n` as input and returns `True`
-if `n` is prime, and `False` otherwise._
+![Alt text](images/q2.png?raw=true "How would I do step3?")
 
 
 ## Pseudo Code

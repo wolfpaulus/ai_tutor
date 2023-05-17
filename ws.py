@@ -15,6 +15,7 @@ serverPort = 8080
 api_key = os.environ['OPENAI_API_KEY']
 api_model = "gpt-3.5-turbo" #  'gpt-4'
 api_temperature = 0.3
+max_code_segment_length = 10
 messages = [
 
     {
@@ -26,7 +27,7 @@ messages = [
         "content": "Additionally, you never show Python source code."
     }
 ]
-max_code_segment_length = 8
+
 
 
 class MyServer(BaseHTTPRequestHandler):

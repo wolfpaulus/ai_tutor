@@ -43,7 +43,7 @@ _What does it mean that a number is prime?_ or _How would I do step 3?_
 ![Alt text](images/q1.png?raw=true "What does it mean that a number is prime?")
 
 The AI Tutor will answer these questions in the context of the given task and strategy. 
-However, code snippets longer than 8 lines are removed from the answer:
+However, code snippets longer than `10` lines are removed from the answer:
 
 ![Alt text](images/q2.png?raw=true "How would I do step3?")
 

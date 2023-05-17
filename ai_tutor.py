@@ -56,9 +56,9 @@ def validate(task: str) -> None:
         {"role": "user", "content": "Provide feedback on the python implementation below."}
     ]
     notebook_json_string = _message.blocking_request('get_ipynb', request='', timeout_sec=5)
-    code = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
-    print(code)
-    print_wrapped(ask(context, code, code=True))
+    pycode = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
+    print(pycode)
+    print_wrapped(ask(context, pycode, code=True))
 
 
 def create_context(task: str, steps: str) -> []:

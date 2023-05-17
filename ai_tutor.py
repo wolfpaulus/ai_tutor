@@ -15,7 +15,7 @@ def print_wrapped(text: str) -> None:
         print(element)
 
 
-def ask(server: str, context: [], question, code: bool = False) -> str:
+def ask(context: [], question, code: bool = False) -> str:
     try:
         context.append({"role": "user", "content": question})
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
@@ -40,16 +40,16 @@ def ask(server: str, context: [], question, code: bool = False) -> str:
         return str(e.__cause__)
 
 
-def prompt(server, context: [], p: str = "Please enter your question: ") -> None:
+def prompt(context: [], p: str = "Please enter your question: ") -> None:
     try:
         print()
         question = input(p)
-        print_wrapped(ask(server, context, question))
+        print_wrapped(ask(context, question))
     except KeyboardInterrupt:
         pass
 
 
-def validate(server: str, task: str) -> None:
+def validate(task: str) -> None:
     context = [
         {"role": "user", "content": task},
         {"role": "user", "content": "Provide feedback on the python implementation below."}
@@ -68,11 +68,7 @@ def create_context(task: str, steps: str) -> []:
     ]
 
 
-# def set_css():
-#     display(HTML('''<style>input { width: 100%;}</style>'''))
-#
-#
-# get_ipython().events.register('pre_run_cell', set_css)
+server = "https://erau13.techcasitaproductions.com/"
 
 print("""Disclaimer: 
 The AI Python Tutor is an educational tool, 

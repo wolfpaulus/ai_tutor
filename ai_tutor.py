@@ -1,12 +1,12 @@
 """
     AI Tutor init code for colab integration
 """
-from IPython.display import display, Markdown, Latex, HTML
+#from IPython.display import display, Markdown, Latex, HTML
+#from urllib.parse import urlencode
 from json import dumps, loads
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 import textwrap
-from google.colab import _message
+
 
 
 def print_wrapped(text: str) -> None:
@@ -50,6 +50,7 @@ def prompt(context: [], p: str = "Please enter your question: ") -> None:
 
 
 def validate(task: str) -> None:
+    from google.colab import _message
     context = [
         {"role": "user", "content": task},
         {"role": "user", "content": "Provide feedback on the python implementation below."}
@@ -57,7 +58,7 @@ def validate(task: str) -> None:
     notebook_json_string = _message.blocking_request('get_ipynb', request='', timeout_sec=5)
     code = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
     print(code)
-    print_wrapped(ask(server, context, code, code=True))
+    print_wrapped(ask(context, code, code=True))
 
 
 def create_context(task: str, steps: str) -> []:

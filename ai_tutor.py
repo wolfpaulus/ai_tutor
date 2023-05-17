@@ -43,7 +43,6 @@ def ask(server: str, context: [], question, code: bool = False) -> str:
 def prompt(server, context: [], p: str = "Please enter your question: ") -> None:
     try:
         print()
-        print(p)
         question = input(p)
         print_wrapped(ask(server, context, question))
     except KeyboardInterrupt:

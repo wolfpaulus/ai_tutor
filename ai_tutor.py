@@ -5,9 +5,7 @@
 from json import dumps, loads
 from urllib.request import Request, urlopen
 import textwrap
-
-from IPython.core.display_functions import clear_output
-from IPython.display import HTML, Markdown, display
+from IPython.display import HTML, Markdown, display, clear_output
 
 
 def print_wrapped(text: str) -> None:

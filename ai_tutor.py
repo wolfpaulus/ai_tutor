@@ -9,15 +9,15 @@ from IPython.display import HTML, Markdown, display
 
 
 def print_wrapped(text: str) -> None:
-    wrapper = textwrap.TextWrapper(width=90, replace_whitespace=False)
-    for element in wrapper.wrap(text):
-        display(Markdown(element))
+    #wrapper = textwrap.TextWrapper(width=90, replace_whitespace=False)
+    #for element in wrapper.wrap(text):
+        display(Markdown(text   ))
 
 
 def ask(context: [], question, code: bool = False) -> str:
     try:
         context.append({"role": "user", "content": question})
-        context.append({"role": "user", "content": "respond in markdown"})
+        context.append({"role": "user", "content": "respond in Markdown"})
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
         context.pop()
         req = Request(server, method="POST")
@@ -44,7 +44,8 @@ def ask(context: [], question, code: bool = False) -> str:
 def prompt(context: [], p: str = "Please enter your question: ") -> None:
     try:
         print()
-        question = input(p)
+        print(p)
+        question = input()
         print_wrapped(ask(context, question))
     except KeyboardInterrupt:
         pass

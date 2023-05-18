@@ -5,18 +5,21 @@
 from json import dumps, loads
 from urllib.request import Request, urlopen
 import textwrap
+from IPython.display import HTML, Markdown, display
 
 
 def print_wrapped(text: str) -> None:
     wrapper = textwrap.TextWrapper(width=90, replace_whitespace=False)
     for element in wrapper.wrap(text):
-        print(element)
+        display(Markdown(element))
 
 
 def ask(context: [], question, code: bool = False) -> str:
     try:
         context.append({"role": "user", "content": question})
+        context.append({"role": "user", "content": "respond in markdown"})
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
+        context.pop()
         req = Request(server, method="POST")
         req.add_header('User-Agent', 'Mozilla/5.0')
         req.add_header('Content-Type', 'application/json; charset=utf-8')
@@ -35,7 +38,7 @@ def ask(context: [], question, code: bool = False) -> str:
         print(e)
         return "Hmm, did you initialize the tutor?"
     except Exception as e:
-        return str(e.__cause__)
+        return str(e)
 
 
 def prompt(context: [], p: str = "Please enter your question: ") -> None:
@@ -66,6 +69,15 @@ def create_context(task: str, steps: str) -> []:
         {"role": "assistant", "content": steps}
     ]
 
+
+def set_css():
+    display(HTML("<style> input { width: 60em !important; } </style>"))
+
+
+try:
+    get_ipython().events.register('pre_run_cell', set_css)
+except NameError:
+    pass
 
 server = "https://erau13.techcasitaproductions.com/"
 

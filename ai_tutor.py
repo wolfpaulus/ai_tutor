@@ -4,16 +4,11 @@
 
 from json import dumps, loads
 from urllib.request import Request, urlopen
-import textwrap
-from IPython.display import HTML, Markdown, display, clear_output
+from IPython.display import Markdown, display, clear_output
 
 
 def print_wrapped(text: str) -> None:
-    clear_output()
     display(Markdown(text))
-    #wrapper = textwrap.TextWrapper(width=90, replace_whitespace=False)
-    #for element in wrapper.wrap(text):
-        #display(Markdown(text   ))
 
 
 def ask(context: [], question, code: bool = False) -> str:
@@ -62,7 +57,7 @@ def validate(task: str) -> None:
     notebook_json_string = _message.blocking_request('get_ipynb', request='', timeout_sec=5)
     pycode = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
     clear_output()
-    display(pycode)
+    print(pycode)
     print_wrapped(ask(context, pycode, code=True))
 
 
@@ -73,15 +68,6 @@ def create_context(task: str, steps: str) -> []:
         {"role": "assistant", "content": steps}
     ]
 
-
-def set_css():
-    display(HTML("<style> input { width: 30em !important; } </style>"))
-
-
-try:
-    get_ipython().events.register('pre_run_cell', set_css)
-except NameError:
-    pass
 
 server = "https://erau13.techcasitaproductions.com/"
 

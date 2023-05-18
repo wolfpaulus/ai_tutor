@@ -15,12 +15,12 @@ serverPort = 8080
 api_key = os.environ['OPENAI_API_KEY']
 api_model = "gpt-3.5-turbo" #  'gpt-4'
 api_temperature = 0.3
-max_code_segment_length = 10
+max_code_segment_length = 12
 messages = [
 
     {
         "role": "system",
-        "content": "You are a helpful, empathetic, and friendly assistant. Your goal is to answer computer science and programming related question, as truthfully as you can but without given away the solution."
+        "content": "You are a helpful, empathetic, and friendly assistant. Your goal is to answer computer science and programming related question, as truthfully as you can but you will not show the implementation."
     },
     {
         "role": "system",

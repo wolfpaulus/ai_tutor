@@ -41,11 +41,10 @@ def ask(context: [], question, code: bool = False) -> str:
         return str(e)
 
 
-def prompt(context: [], p: str = "Please enter your question: ") -> None:
+def prompt(context: [], p: str = "Enter your question: ") -> None:
     try:
         print()
-        print(p)
-        question = input()
+        question = input(p)
         print_wrapped(ask(context, question))
     except KeyboardInterrupt:
         pass
@@ -72,7 +71,7 @@ def create_context(task: str, steps: str) -> []:
 
 
 def set_css():
-    display(HTML("<style> input { width: 60em !important; } </style>"))
+    display(HTML("<style> input { width: 30em !important; } </style>"))
 
 
 try:

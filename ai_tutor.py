@@ -14,9 +14,7 @@ def print_wrapped(text: str) -> None:
 def ask(context: [], question, code: bool = False) -> str:
     try:
         context.append({"role": "user", "content": question})
-        context.append({"role": "user", "content": "respond in Markdown"})
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
-        context.pop()
         req = Request(server, method="POST")
         req.add_header('User-Agent', 'Mozilla/5.0')
         req.add_header('Content-Type', 'application/json; charset=utf-8')

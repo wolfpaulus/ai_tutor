@@ -9,15 +9,13 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from json import dumps
 import openai
 
-
 hostName = "0.0.0.0"
 serverPort = 8080
 api_key = os.environ['OPENAI_API_KEY']
-api_model = "gpt-3.5-turbo" #  'gpt-4'
+api_model = "gpt-3.5-turbo"  # 'gpt-4'
 api_temperature = 0.3
 max_code_segment_length = 12
 messages = [
-
     {
         "role": "system",
         "content": "You are a helpful, empathetic, and friendly assistant. Your goal is to answer computer science and programming related question, as truthfully as you can but you will not show the implementation."
@@ -27,7 +25,7 @@ messages = [
         "content": "Additionally, you never show Python source code."
     }
 ]
-
+accept_format = {"role": "user", "content": "Please respond in Markdown"}
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -37,6 +35,8 @@ class MyServer(BaseHTTPRequestHandler):
         model = api_model
         temperature = api_temperature
         messages.extend(my_messages)
+        messages.append(accept_format)
+
         try:
             completion = openai.ChatCompletion.create(
                 model=model,

@@ -85,7 +85,7 @@ def create_context(task: str, steps: str) -> []:
 
 
 server = "https://erau13.techcasitaproductions.com/"
-server = "http://localhost:8080/"
+#server = "http://localhost:8080/"
 print("""Disclaimer: 
 The AI Python Tutor is an educational tool, 
 but it may not cover all scenarios or programming nuances. 

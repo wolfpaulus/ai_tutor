@@ -51,6 +51,16 @@ class MyServer(BaseHTTPRequestHandler):
         except:
             return 500, "Something went wrong, please try again."
 
+    def do_GET(self) -> None:
+        if self.path == "/health":
+            status, content, content_type = 200, "OK", "text/html"
+        else:
+            status, content, content_type = 404, "Not Found", "text/html"
+        self.send_response(status)
+        self.send_header("Content-type", content_type)
+        self.end_headers()
+        self.wfile.write(bytes(content, "utf-8"))
+
     def do_POST(self):
         post_body = self.rfile.read(int(self.headers.get('content-length')))
         try:

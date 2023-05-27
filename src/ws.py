@@ -48,7 +48,8 @@ class MyServer(BaseHTTPRequestHandler):
             if code and max_code_segment_length < code.string.count("\n"):  # remove source sode if too long
                 result = re.sub("```[^```]+```", " ... source code removed ... ", result)
             return 200, result
-        except:
+        except Exception as e:
+            print(e)
             return 500, "Something went wrong, please try again."
 
     def do_GET(self) -> None:

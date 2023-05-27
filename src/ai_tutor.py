@@ -7,11 +7,14 @@ from urllib.request import Request, urlopen
 from IPython.display import Markdown, display, clear_output
 
 
-def print_wrapped(text: str) -> None:
-    display(Markdown(text))
-
-
 def ask(context: [], question, code: bool = False) -> str:
+    """
+    Ask the AI tutor a question.
+    :param context: task and steps
+    :param question: student question
+    :param code: whether or not to review code
+    :return: answer, hopefully in markdown format
+    """
     try:
         context.append({"role": "user", "content": question})
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
@@ -37,16 +40,26 @@ def ask(context: [], question, code: bool = False) -> str:
 
 
 def prompt(context: [], p: str = "Enter your question: ") -> None:
+    """
+    :param context:
+    :param p: prompt, in case you don't like the default
+    :return: answer, hopefully in markdown format
+    """
     try:
         clear_output()
         print()
         question = input(p)
-        print_wrapped(ask(context, question))
+        display(Markdown(ask(context, question)))
     except KeyboardInterrupt:
         pass
 
 
 def validate(task: str) -> None:
+    """
+    Request a code review from the AI tutor.
+    :param task:
+    :return: answer, hopefully in markdown format
+    """
     from google.colab import _message
     context = [
         {"role": "user", "content": task},
@@ -56,19 +69,23 @@ def validate(task: str) -> None:
     pycode = "".join(notebook_json_string["ipynb"]["cells"][-2]["source"])
     clear_output()
     print(pycode)
-    print_wrapped(ask(context, pycode, code=True))
+    display(Markdown(ask(context, pycode, code=True)))
 
 
 def create_context(task: str, steps: str) -> []:
+    """
+    :param task: The task to be completed
+    :param steps: The steps to complete the task
+    :return: list of dictionaries
+    """
     return [
-        {"role": "user", "content": task},
-        {"role": "user", "content": "How do I get started?"},
-        {"role": "assistant", "content": steps}
+        {"role": "assistant", "content": f"The goal is to {task}, using this approach: {steps}"},
+        {"role": "user", "content": "How do I get started?"}
     ]
 
 
 server = "https://erau13.techcasitaproductions.com/"
-
+server = "http://localhost:8080/"
 print("""Disclaimer: 
 The AI Python Tutor is an educational tool, 
 but it may not cover all scenarios or programming nuances. 

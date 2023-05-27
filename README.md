@@ -103,5 +103,5 @@ and backends can be switched easily.
 The proxy is a simple python application. It can be build and run using docker:
 ```
 docker build -t openai-proxy .
-docker run --restart unless-stopped -d --name proxy -p 8013:8080 -e OPENAI_API_KEY=sk... openai-proxy
+docker run --restart unless-stopped -d --name openai-proxy -p 8013:8080 -e OPENAI_API_KEY=sk... openai-proxy
 ```

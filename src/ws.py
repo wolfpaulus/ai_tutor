@@ -12,31 +12,32 @@ import openai
 hostName = "0.0.0.0"
 serverPort = 8080
 api_key = os.environ['OPENAI_API_KEY']
-api_model = "gpt-3.5-turbo"  # 'gpt-4'
-api_temperature = 0.3
-max_code_segment_length = 12
-messages = [
+max_code_segment_length = 14
+
+model = "gpt-3.5-turbo-0301"
+temperature = 0.2
+tone = "helpful, empathetic, and friendly"
+role = "tutor"
+objective = "to truthfully answer computer science and Python programming related questions"
+audience = "students with no prior Python programming experience"
+points_of_view = "Consider multiple perspectives or opinions."
+limitations = "Never respond with code or implementation."
+format = "Give a response in markdown format."
+
+msg = [
     {
         "role": "system",
-        "content": "You are a helpful, empathetic, and friendly assistant. Your goal is to answer computer science and programming related question, as truthfully as you can but you will not show the implementation."
-    },
-    {
-        "role": "system",
-        "content": "Additionally, you never show Python source code."
+        "content": f"You are a {tone} {role}. Your objective is {objective}. Your audience is {audience}. {points_of_view} {limitations} {format}"
     }
 ]
-accept_format = {"role": "user", "content": "Please respond in Markdown"}
 
 
 class MyServer(BaseHTTPRequestHandler):
 
     def _ask_openai(self, my_messages: list) -> (int, str):
         openai.api_key = api_key
-        model = api_model
-        temperature = api_temperature
+        messages = msg.copy()
         messages.extend(my_messages)
-        messages.append(accept_format)
-
         try:
             completion = openai.ChatCompletion.create(
                 model=model,
@@ -54,12 +55,10 @@ class MyServer(BaseHTTPRequestHandler):
         post_body = self.rfile.read(int(self.headers.get('content-length')))
         try:
             payload = json.loads(post_body.decode(encoding='utf-8', errors='strict'))
-            print(payload)
             status, result = self._ask_openai(payload)
         except ValueError as e:
             try:
                 payload = json.loads(post_body.decode(encoding='unicode_escape', errors='strict'))
-                print(payload)
                 status, result = self._ask_openai(payload)
             except ValueError as e:
                 status, result = 501, str(e)

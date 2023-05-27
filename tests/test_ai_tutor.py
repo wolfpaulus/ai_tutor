@@ -1,16 +1,13 @@
 """
-This file is used to test the AI tutor proxy.
+Minimal test for the ai_tutor module.
 """
-
 from ai_tutor import create_context, ask
-
 
 task = "Create the first 100 prime numbers"
 steps = """1. Initialize an empty list to store the prime numbers.
 2. Start with a number, let's say 2, and check if it is prime.
 3. If the number is prime, add it to the list of primes.
 4. Increment the number and repeat steps 3 and 4 until you have found n prime numbers."""
-context = create_context(task, steps)
 
 code = '''
 """
@@ -36,15 +33,16 @@ if __name__ == "__main__":
 
 '''
 
-# Prompt
-question = "How would I approach step 3?"
-assert ask(context, question) is not None
+
+def test_ask():
+    context = create_context(task, steps)
+    question = "How would I approach step 3?"
+    answer = ask(context, question)
+    assert answer is not None
 
 
-# Validate the code
-context = [
-    {"role": "user", "content": task},
-    {"role": "user", "content": "Provide feedback on the python implementation below."}
-]
-assert ask(context, code, code=True) is not None
-
+def test_validate():
+    context = create_context(task, "Provide feedback on the python implementation below.")
+    answer = ask(context, code, code=True)
+    print(answer)
+    assert answer is not None

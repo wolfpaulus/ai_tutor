@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-zip ./package.zip ai_tutor.py setup.py
+cd ./src
+zip ../package.zip ./ai_tutor.py ./setup.py

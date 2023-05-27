@@ -11,7 +11,7 @@ import openai
 
 hostName = "0.0.0.0"
 serverPort = 8080
-api_key = os.environ['OPENAI_API_KEY']
+api_key = os.getenv('OPENAI_API_KEY', '')
 max_code_segment_length = 14
 
 model = "gpt-3.5-turbo-0301"

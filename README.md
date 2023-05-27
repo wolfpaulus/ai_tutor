@@ -1,4 +1,7 @@
+![aitutor_cover.jpeg](images%2Faitutor_cover.jpeg)
 # AI - Tutor
+[![docker-publish](https://github.com/wolfpaulus/ai_tutor/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/wolfpaulus/ai_tutor/actions/workflows/docker-publish.yml)
+![WebService](https://img.shields.io/website?down_color=red&down_message=offline&style=plastic&up_color=green&up_message=online&url=https://img.shields.io/website/https/erau13.techcasitaproductions.com.health.svg)
 
 The AI Tutor is a web application that allows students to ask questions about a programming task.
 They can also ask to have their solution evaluated.

@@ -21,7 +21,7 @@ role = "tutor"
 objective = "to truthfully answer computer science and Python programming related questions"
 audience = "students with no prior Python programming experience"
 points_of_view = "Consider multiple perspectives or opinions."
-limitations = "Never respond with code or implementation."
+limitations = "Never respond with code or implementation. You will not be able to put Python code into a response. Do not respond with code."
 format = "Give a response in markdown format."
 
 msg = [
@@ -34,10 +34,10 @@ msg = [
 
 class MyServer(BaseHTTPRequestHandler):
 
-    def _ask_openai(self, my_messages: list) -> (int, str):
+    def _ask_openai(self, context: list) -> (int, str):
         openai.api_key = api_key
         messages = msg.copy()
-        messages.extend(my_messages)
+        messages.extend(context)
         try:
             completion = openai.ChatCompletion.create(
                 model=model,

@@ -16,7 +16,7 @@ def ask(context: [], question, code: bool = False) -> str:
     :return: answer, hopefully in markdown format
     """
     try:
-        context.append({"role": "user", "content": question})
+        context.append({"role": "user", "content": question})  # add question to context
         payload = dumps(context).encode(encoding="utf-8", errors="strict")
         req = Request(server, method="POST")
         req.add_header('User-Agent', 'Mozilla/5.0')
@@ -27,10 +27,8 @@ def ask(context: [], question, code: bool = False) -> str:
             status = resp.status
             content = loads(resp.read().decode())
             if status == 200:
-                if code:
-                    context.pop()
-                else:
-                    context.append({"role": "assistant", "content": content})
+                if not code:
+                    context.append({"role": "assistant", "content": content})  # add response to context
             return content
     except ValueError as e:
         print(e)

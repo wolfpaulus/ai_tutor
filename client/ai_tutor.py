@@ -1,11 +1,13 @@
 """
     AI Tutor init code for colab integration
+    Author: Wolf Paulus (https://wolfpaulus.com)
 """
 
 from json import dumps, loads
 from urllib.request import Request, urlopen
 from IPython.display import Markdown, display, clear_output
 
+server = "https://func0042.azurewebsites.net/ask"
 
 def ask(context: [], question, code: bool = False) -> str:
     """
@@ -82,8 +84,8 @@ def create_context(task: str, steps: str) -> []:
     ]
 
 
-server = "https://erau13.techcasitaproductions.com/"
-#server = "http://localhost:8080/"
+
+
 print("""Disclaimer: 
 The AI Python Tutor is an educational tool, 
 but it may not cover all scenarios or programming nuances. 
